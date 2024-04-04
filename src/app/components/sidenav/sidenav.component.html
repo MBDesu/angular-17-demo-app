@@ -1,0 +1,36 @@
+<mat-toolbar>
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>{{ title }}</span>
+  <span class="spacer"></span>
+  <span>{{ sessionManagementService.getProfile()['given_name'] }}</span>
+  <button mat-icon-button [matMenuTriggerFor]="userMenu">
+    <img [ngSrc]="sessionManagementService.getProfile()['picture']"
+         style="border-radius: 180px"
+         width="60"
+         height="60"
+         alt="user image"
+    />
+  </button>
+  <mat-menu #userMenu>
+    <button mat-menu-item (click)="sessionManagementService.logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+<mat-sidenav-container class="app-content">
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+    <mat-nav-list>
+      @for (navItem of navItems; track navItem) {
+        <mat-list-item [activated]="navItem.active ?? false" (click)="activate(navItem)">{{navItem.label}}</mat-list-item>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="margin: 2em;">
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,4 @@
+<div>
+  <app-address-form (errors)="updateStatus($event)"></app-address-form>
+  <button mat-raised-button type="submit" color="primary" [disabled]="addressFormStatus !== 'VALID'">Submit</button>
+</div>
