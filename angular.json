@@ -21,6 +21,9 @@
             "outputPath": "dist/ng-spring-front",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "externalDependencies": [
+              "mermaid"
+            ],
             "polyfills": [
               "zone.js"
             ],
