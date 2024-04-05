@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AddressFormComponent } from '../../components/address-form/address-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatAddressComponent } from '../../components/mat-address/mat-address.component';
 import { FormControlStatus } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -11,7 +10,6 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [
     AddressFormComponent,
-    MatAddressComponent,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
