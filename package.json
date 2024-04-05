@@ -23,7 +23,7 @@
     "@angular/router": "^17.3.3",
     "angular-oauth2-oidc": "^17.0.2",
     "firebase": "^10.10.0",
-    "mermaid": "latest",
+    "mermaid": "^10.9.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
