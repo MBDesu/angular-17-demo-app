@@ -41,7 +41,7 @@ export class SessionManagementService {
     this.router.navigateByUrl(PageRoute.SPLASH).then(() => this.isLoggedIn = false);
   }
 
-  public getProfile(): Record<string, any> {
+  public getProfile(): Record<string, unknown> {
     return this.authService.getIdentityClaims();
   }
 

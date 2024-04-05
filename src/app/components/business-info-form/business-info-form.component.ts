@@ -1,10 +1,9 @@
 import { Component, Output } from '@angular/core';
-import { FormBuilder, FormControlStatus, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-address-form',
@@ -16,10 +15,10 @@ import { filter } from 'rxjs';
     MatSelectModule,
     ReactiveFormsModule,
   ],
-  templateUrl: './address-form.component.html',
-  styleUrl: './address-form.component.scss'
+  templateUrl: './business-info-form.component.html',
+  styleUrl: './business-info-form.component.scss'
 })
-export class AddressFormComponent {
+export class BusinessInfoFormComponent {
 
   protected states = [
     'AL', 'AK', 'AZ', 'AR', 'AS', 'CA',

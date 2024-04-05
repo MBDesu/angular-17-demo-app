@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AddressFormComponent } from '../../components/address-form/address-form.component';
+import { BusinessInfoFormComponent } from '../../components/business-info-form/business-info-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControlStatus } from '@angular/forms';
@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-forms-page',
   standalone: true,
   imports: [
-    AddressFormComponent,
+    BusinessInfoFormComponent,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { SessionManagementService } from '../../common/services/session-management/session-management.service';
 import { Router } from '@angular/router';
 import { PageRoute } from '../../app.routes';
 

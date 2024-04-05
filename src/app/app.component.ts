@@ -28,6 +28,7 @@ import { SessionManagementService } from './common/services/session-management/s
 export class AppComponent implements OnInit {
 
   title = 'ng-spring-front';
+  test: boolean = true;
 
   constructor(public sessionManagementService: SessionManagementService) {}
 
