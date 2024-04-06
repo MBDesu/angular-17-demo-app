@@ -2,7 +2,7 @@
   <form [formGroup]="form">
     <app-business-information-form #businessInformation formControlName="businessInformation" (change)="updateValidity()"></app-business-information-form>
     <app-additional-business-information-form #additionalInformation formControlName="additionalInformation"></app-additional-business-information-form>
-    <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid || !form.controls.businessInformation.valid">Submit</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid">Submit</button>
     <br>
     <br>
     <div>
