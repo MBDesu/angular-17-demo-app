@@ -1,36 +1,23 @@
-import { Directive, Input } from '@angular/core';
-import { FormGroup, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-@Directive({
-  selector: '[appAtLeastSomeChecked]',
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: AtLeastSomeCheckedValidatorDirective,
-      multi: true,
-    }
-  ],
-  standalone: true
-})
-export class AtLeastSomeCheckedValidatorDirective implements Validator {
 
-  @Input()
-  minRequired = 1;
+export class CustomValidators {
 
-  validate = (group: FormGroup): ValidationErrors | null => {
-    let checked = 0;
-    Object.keys(group.controls).forEach((key) => {
-      const control = group.controls[key];
-      if (control.value === true) {
-        checked++;
+  static requireAtLeastSomeCheckedValidator = (minRequired = 1): ValidatorFn => {
+    return (formControl: AbstractControl): ValidationErrors | null => {
+      const group = formControl as FormGroup;
+      let checked = 0;
+      Object.keys(group.controls).forEach((key) => {
+        const controlValue = group.controls[key].value;
+        if (controlValue) checked++;
+      });
+      if (checked < minRequired) {
+        return {
+          atLeastSomeChecked: 'At least ' + minRequired + ' checkboxes must be checked.',
+        }
       }
-    });
-    if (checked < this.minRequired) {
-      return {
-        atLeastSomeChecked: true
-      }
+      return null;
     }
-    return null;
-  };
+  }
 
 }

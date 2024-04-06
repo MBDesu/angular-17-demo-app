@@ -7,6 +7,20 @@ export abstract class NestedForm implements ControlValueAccessor, Validator {
 
   abstract value: FormGroup;
 
+  getErrors(): string[] {
+    const errors: string[] = [];
+    if (this.value.controls) {
+      Object.keys(this.value.controls).forEach((control) => {
+        if (this.value.controls[control].errors) {
+          Object.keys(this.value.controls[control].errors as { [key: string]: any }).forEach((error) => {
+            errors.push(`${control}: (${error}): ${this.value.controls[control]?.errors?.[error]}`);
+          });
+        }
+      });
+    }
+    return errors;
+  }
+
   validate(): ValidationErrors | null {
     if (this.value.valid) {
       return null;

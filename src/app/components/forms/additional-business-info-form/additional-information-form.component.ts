@@ -6,8 +6,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormBuilder, NG_VALIDATORS, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { BaseFormComponent } from '../base-form/base-form.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { AtLeastSomeCheckedValidatorDirective } from '../validators';
 import { NestedForm } from '../nested-form';
+import { CustomValidators } from '../validators';
 
 @Component({
   selector: 'app-additional-business-information-form',
@@ -20,7 +20,6 @@ import { NestedForm } from '../nested-form';
     MatSelectModule,
     ReactiveFormsModule,
     BaseFormComponent,
-    AtLeastSomeCheckedValidatorDirective,
   ],
   providers: [
   {
@@ -43,9 +42,11 @@ export class AdditionalInformationFormComponent extends NestedForm {
 
   override value = this.fb.group({
     paymentAcceptance: this.fb.group({
-      inPerson: [false],
-      online: [false],
-      phoneOrMail: [false],
+      inPerson: [],
+      online: [],
+      phoneOrMail: [],
+    }, {
+      validators: CustomValidators.requireAtLeastSomeCheckedValidator(),
     }),
   });
 
