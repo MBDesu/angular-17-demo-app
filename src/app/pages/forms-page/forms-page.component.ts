@@ -33,10 +33,4 @@ export class FormsPageComponent {
     additionalInformation: [''],
   });
 
-  updateValidity(): void {
-    this.form.controls.businessInformation.updateValueAndValidity();
-    this.form.controls.additionalInformation.updateValueAndValidity();
-    this.form.updateValueAndValidity();
-  }
-
 }
