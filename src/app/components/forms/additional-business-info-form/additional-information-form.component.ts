@@ -13,13 +13,13 @@ import { CustomValidators } from '../validators';
   selector: 'app-additional-business-information-form',
   standalone: true,
   imports: [
+    BaseFormComponent,
     MatCardModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
-    BaseFormComponent,
   ],
   providers: [
   {
