@@ -3,7 +3,7 @@ import { ControlValueAccessor, FormGroup, ValidationErrors, Validator } from '@a
 export type ChangeCallbackFn<T> = (value: T) => void;
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export abstract class NestedFormComponent implements ControlValueAccessor, Validator {
+export abstract class NestedForm implements ControlValueAccessor, Validator {
 
   abstract value: FormGroup;
 

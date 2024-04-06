@@ -7,7 +7,7 @@ import { FormBuilder, NG_VALIDATORS, NG_VALUE_ACCESSOR, ReactiveFormsModule } fr
 import { BaseFormComponent } from '../base-form/base-form.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AtLeastSomeCheckedValidatorDirective } from '../validators';
-import { NestedFormComponent } from '../nested-form';
+import { NestedForm } from '../nested-form';
 
 @Component({
   selector: 'app-additional-business-information-form',
@@ -37,7 +37,7 @@ import { NestedFormComponent } from '../nested-form';
   templateUrl: './additional-information-form.component.html',
   styleUrl: './additional-information-form.component.scss'
 })
-export class AdditionalInformationFormComponent extends NestedFormComponent {
+export class AdditionalInformationFormComponent extends NestedForm {
 
   private fb = inject(FormBuilder);
 

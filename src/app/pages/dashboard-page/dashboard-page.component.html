@@ -2,6 +2,52 @@
 <mat-divider />
 <br>
 <br>
+<h2>Class Diagram</h2>
+<mat-divider />
+<pre class="mermaid">
+  ---
+  title: Nested Forms
+  ---
+  classDiagram
+
+  class ControlValueAccessor
+  &lt;&lt;interface&gt;&gt; ControlValueAccessor
+    ControlValueAccessor : +registerOnChange((T) =&gt; void) void
+    ControlValueAccessor : +registerOnTouched() void
+    ControlValueAccessor : +writeValue(FormGroup) void
+
+  class Validator
+  &lt;&lt;interface&gt;&gt; Validator
+    Validator : +validate() ValidationErrors|null
+
+  class NestedForm
+  ControlValueAccessor &lt;-- NestedForm
+  Validator &lt;-- NestedForm
+    NestedForm : +FormGroup value*
+  note for NestedForm "Implements\nControlValueAccessor\nto reduce boilerplate"
+
+  class BaseFormComponent
+    BaseFormComponent : +string title
+  note for BaseFormComponent "Places the form\non a titled\nmat-card"
+
+  class FormsPageComponent
+    FormsPageComponent : #FormGroup form
+
+  class BusinessInformationFormComponent
+  NestedForm &lt;-- BusinessInformationFormComponent
+  BaseFormComponent *-- BusinessInformationFormComponent
+  BusinessInformationFormComponent *-- FormsPageComponent
+    BusinessInformationFormComponent : +FormGroup value
+
+  class AdditionalInformationFormComponent
+  NestedForm &lt;-- AdditionalInformationFormComponent
+  BaseFormComponent *-- AdditionalInformationFormComponent
+  AdditionalInformationFormComponent *-- FormsPageComponent
+    AdditionalInformationFormComponent : +FormGroup value
+
+</pre>
+<br>
+<br>
 <h2>Git Diagram</h2>
 <mat-divider />
 <pre class="mermaid">

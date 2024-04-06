@@ -30,7 +30,7 @@ export class FormsPageComponent implements OnInit {
 
   private fb = inject(FormBuilder);
 
-  form = this.fb.group({
+  protected form = this.fb.group({
     businessInformation: [],
     additionalInformation: [],
   });
