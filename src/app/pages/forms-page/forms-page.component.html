@@ -5,13 +5,13 @@
     @if (form.controls.businessInformation.hasError('invalidForm')) {
       <mat-error>Business Information has error(s):</mat-error>
         @for (error of businessInformation.getErrors(); track error) {
-          <mat-error style="margin-left: 2em;">{{error}}</mat-error>
+          <mat-error class="error-indent">{{error}}</mat-error>
         }
     }
     @if (form.controls.additionalInformation.hasError('invalidForm')) {
       <mat-error>Additional Information has error(s):</mat-error>
       @for (error of additionalInformation.getErrors(); track error) {
-        <mat-error style="margin-left: 2em;">{{error}}</mat-error>
+        <mat-error class="error-indent">{{error}}</mat-error>
       }
     }
     <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid || !form.controls.businessInformation.valid">Submit</button>

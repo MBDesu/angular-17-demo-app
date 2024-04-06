@@ -5,15 +5,15 @@
   <span>{{ title }}</span>
   <span class="spacer"></span>
   <button mat-stroked-button [matMenuTriggerFor]="userMenu">
-    <div style="display: flex; align-items: center; vertical-align: middle;">
-    <span>{{ sessionManagementService.getProfile()['given_name'] }}</span>
-    <span style="margin-right: 0.6rem;"></span>
-    <img [ngSrc]="sessionManagementService.getProfile()['picture']"
-         style="border-radius: 180px"
-         width="30"
-         height="30"
-         alt="user image"
-    />
+    <div class="button-label-container">
+      <span>{{ sessionManagementService.getProfile()['given_name'] }}</span>
+      <span class="button-label-spacer"></span>
+      <img [ngSrc]="sessionManagementService.getProfile()['picture']"
+           class="profile-icon"
+           width="30"
+           height="30"
+           alt="user image"
+      />
     </div>
   </button>
   <mat-menu #userMenu>
@@ -32,7 +32,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div style="margin: 2em;">
+    <div class="content-container">
       <ng-content></ng-content>
     </div>
   </mat-sidenav-content>

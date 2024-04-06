@@ -13,3 +13,21 @@
 .mat-mdc-outlined-button {
   border-radius: 135px;
 }
+
+.button-label-container {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.button-label-spacer {
+  margin-right: 0.6rem;
+}
+
+.profile-icon {
+  border-radius: 180px;
+}
+
+.content-container {
+  margin: 2em;
+}
