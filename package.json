@@ -24,9 +24,9 @@
     "angular-oauth2-oidc": "^17.0.2",
     "firebase": "^10.10.0",
     "mermaid": "^10.9.0",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.14.3"
+    "rxjs": "~7.8.1",
+    "tslib": "^2.6.2",
+    "zone.js": "~0.14.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.3",
@@ -37,16 +37,16 @@
     "@angular-eslint/template-parser": "17.3.0",
     "@angular/cli": "^17.3.3",
     "@angular/compiler-cli": "^17.3.3",
-    "@types/jasmine": "~5.1.0",
+    "@types/jasmine": "~5.1.4",
     "@typescript-eslint/eslint-plugin": "7.2.0",
     "@typescript-eslint/parser": "7.2.0",
     "eslint": "^8.57.0",
-    "jasmine-core": "~5.1.0",
-    "karma": "~6.4.0",
+    "jasmine-core": "~5.1.2",
+    "karma": "~6.4.3",
     "karma-chrome-launcher": "~3.2.0",
-    "karma-coverage": "~2.2.0",
+    "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.4.2"
+    "typescript": "~5.4.4"
   }
 }
