@@ -19,7 +19,7 @@ export class SplashPageComponent {
   constructor(private router: Router) {}
 
   proceed(): void {
-    this.router.navigateByUrl(PageRoute.DASHBOARD);
+    this.router.navigate([PageRoute.DASHBOARD]);
   }
 
 }

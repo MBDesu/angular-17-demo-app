@@ -38,7 +38,7 @@ export class SessionManagementService {
   public logout(): void {
     this.authService.revokeTokenAndLogout().then((idk) => console.log(idk));
     this.authService.logOut();
-    this.router.navigateByUrl(PageRoute.SPLASH).then(() => this.isLoggedIn = false);
+    this.router.navigate([PageRoute.SPLASH]).then(() => this.isLoggedIn = false);
   }
 
   public getProfile(): Record<string, string | number | boolean> {

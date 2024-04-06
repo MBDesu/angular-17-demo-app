@@ -50,7 +50,7 @@ export class SidenavComponent implements OnInit {
   }
 
   protected activate(navItem: NavigableRoute): void {
-    this.router.navigateByUrl(navItem.route).then((): void => {
+    this.router.navigate([navItem.route]).then((): void => {
       return;
     });
   }
