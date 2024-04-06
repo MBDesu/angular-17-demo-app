@@ -21,8 +21,8 @@
     Validator : +validate() ValidationErrors|null
 
   class NestedForm
-  ControlValueAccessor &lt;-- NestedForm
-  Validator &lt;-- NestedForm
+  ControlValueAccessor &lt;|-- NestedForm
+  Validator &lt;|-- NestedForm
     NestedForm : +FormGroup value*
   note for NestedForm "Implements\nControlValueAccessor\nto reduce boilerplate"
 
@@ -34,13 +34,13 @@
     FormsPageComponent : #FormGroup form
 
   class BusinessInformationFormComponent
-  NestedForm &lt;-- BusinessInformationFormComponent
+  NestedForm &lt;|-- BusinessInformationFormComponent
   BaseFormComponent *-- BusinessInformationFormComponent
   BusinessInformationFormComponent *-- FormsPageComponent
     BusinessInformationFormComponent : +FormGroup value
 
   class AdditionalInformationFormComponent
-  NestedForm &lt;-- AdditionalInformationFormComponent
+  NestedForm &lt;|-- AdditionalInformationFormComponent
   BaseFormComponent *-- AdditionalInformationFormComponent
   AdditionalInformationFormComponent *-- FormsPageComponent
     AdditionalInformationFormComponent : +FormGroup value
