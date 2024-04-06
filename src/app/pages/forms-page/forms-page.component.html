@@ -2,19 +2,23 @@
   <form [formGroup]="form">
     <app-business-information-form #businessInformation formControlName="businessInformation" (change)="updateValidity()"></app-business-information-form>
     <app-additional-business-information-form #additionalInformation formControlName="additionalInformation"></app-additional-business-information-form>
-    @if (form.controls.businessInformation.hasError('invalidForm')) {
-      <mat-error>Business Information has error(s):</mat-error>
+    <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid || !form.controls.businessInformation.valid">Submit</button>
+    <br>
+    <br>
+    <div>
+      @if (form.controls.businessInformation.hasError('invalidForm')) {
+        <mat-error>Business Information has error(s):</mat-error>
         @for (error of businessInformation.getErrors(); track error) {
           <mat-error class="error-indent">{{error}}</mat-error>
         }
-    }
-    @if (form.controls.additionalInformation.hasError('invalidForm')) {
-      <mat-error>Additional Information has error(s):</mat-error>
-      @for (error of additionalInformation.getErrors(); track error) {
-        <mat-error class="error-indent">{{error}}</mat-error>
       }
-    }
-    <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid || !form.controls.businessInformation.valid">Submit</button>
+      @if (form.controls.additionalInformation.hasError('invalidForm')) {
+        <mat-error>Additional Information has error(s):</mat-error>
+        @for (error of additionalInformation.getErrors(); track error) {
+          <mat-error class="error-indent">{{error}}</mat-error>
+        }
+      }
+    </div>
   </form>
 </div>
 <pre>{{ form.value | json }}</pre>
