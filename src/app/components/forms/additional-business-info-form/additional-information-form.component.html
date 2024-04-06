@@ -1,0 +1,13 @@
+<app-base-form title="Additional Information">
+  <form [formGroup]="value">
+      <mat-label>How will this business accept payments?</mat-label>
+      <form formGroupName="paymentAcceptance" appAtLeastSomeChecked>
+        <p><mat-checkbox formControlName="inPerson">Face-to-face</mat-checkbox></p>
+        <p><mat-checkbox formControlName="online">Entered online</mat-checkbox></p>
+        <p><mat-checkbox formControlName="phoneOrMail">Mail order / phone order</mat-checkbox></p>
+        @if (value.controls['paymentAcceptance'].hasError('atLeastSomeChecked')) {
+          <mat-error>At least one payment method is <strong>required</strong></mat-error>
+        }
+      </form>
+  </form>
+</app-base-form>

@@ -1,4 +1,14 @@
 <div>
-  <app-address-form (errors)="updateStatus($event)"></app-address-form>
-  <button mat-raised-button type="submit" color="primary" [disabled]="addressFormStatus !== 'VALID'">Submit</button>
+  <form [formGroup]="form">
+    <app-business-information-form formControlName="businessInformation" (change)="updateValidity()"></app-business-information-form>
+    <app-additional-business-information-form formControlName="additionalInformation" (change)="updateValidity()"></app-additional-business-information-form>
+    @if (form.controls.businessInformation.hasError('invalidForm')) {
+      <mat-error>Business Information has errors</mat-error>
+    }
+    @if (form.controls.additionalInformation.hasError('invalidForm')) {
+      <mat-error>Additional Information has errors</mat-error>
+    }
+    <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid || !form.controls.businessInformation.valid">Submit</button>
+  </form>
 </div>
+<pre>{{ form.value | json }}</pre>

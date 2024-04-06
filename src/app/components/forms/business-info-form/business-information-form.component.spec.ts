@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BusinessInfoFormComponent } from './business-info-form.component';
+import { BusinessInformationFormComponent } from './business-information-form.component';
 
 describe('AddressFormComponent', () => {
-  let component: BusinessInfoFormComponent;
-  let fixture: ComponentFixture<BusinessInfoFormComponent>;
+  let component: BusinessInformationFormComponent;
+  let fixture: ComponentFixture<BusinessInformationFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BusinessInfoFormComponent]
+      imports: [BusinessInformationFormComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BusinessInfoFormComponent);
+    fixture = TestBed.createComponent(BusinessInformationFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

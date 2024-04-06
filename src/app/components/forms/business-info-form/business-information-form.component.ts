@@ -1,24 +1,41 @@
-import { Component, Output } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, forwardRef, inject, OnInit } from '@angular/core';
+import { FormBuilder, NG_VALIDATORS, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { BaseFormComponent } from '../base-form/base-form.component';
+import { NestedFormComponent } from '../nested-form';
 
 @Component({
-  selector: 'app-address-form',
+  selector: 'app-business-information-form',
   standalone: true,
   imports: [
+    BaseFormComponent,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
   ],
-  templateUrl: './business-info-form.component.html',
-  styleUrl: './business-info-form.component.scss'
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: BusinessInformationFormComponent,
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: BusinessInformationFormComponent,
+      multi: true,
+    },
+  ],
+  templateUrl: './business-information-form.component.html',
+  styleUrl: './business-information-form.component.scss'
 })
-export class BusinessInfoFormComponent {
+export class BusinessInformationFormComponent extends NestedFormComponent {
+
+  private fb = inject(FormBuilder);
 
   protected states = [
     'AL', 'AK', 'AZ', 'AR', 'AS', 'CA',
@@ -33,7 +50,7 @@ export class BusinessInfoFormComponent {
     'WV', 'WI', 'WY',
   ];
 
-  protected addressForm = this.fb.group({
+  override value = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     addressLineOne: ['', Validators.required],
@@ -43,9 +60,8 @@ export class BusinessInfoFormComponent {
     postalCode: ['', Validators.required],
   });
 
-  @Output()
-  errors = this.addressForm.statusChanges;
-
-  constructor(private fb: FormBuilder) {}
+  constructor() {
+    super();
+  }
 
 }
