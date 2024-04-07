@@ -1,13 +1,26 @@
 <app-base-form title="Additional Information">
   <form [formGroup]="value">
-      <mat-label>How will this business accept payments?</mat-label>
-      <form formGroupName="paymentAcceptance">
-        <p><mat-checkbox formControlName="inPerson">Face-to-face</mat-checkbox></p>
-        <p><mat-checkbox formControlName="online">Entered online</mat-checkbox></p>
-        <p><mat-checkbox formControlName="phoneOrMail">Mail order / phone order</mat-checkbox></p>
-        @if (value.controls['paymentAcceptance'].hasError('atLeastSomeChecked') && (value.touched || value.dirty)) {
-          <mat-error>At least one payment method is <strong>required</strong></mat-error>
-        }
-      </form>
+    <div class="row">
+      <div class="col">
+        <mat-label>How will this business accept payments?</mat-label>
+        <form formGroupName="paymentAcceptance">
+          <p><mat-checkbox formControlName="inPerson">Face-to-face</mat-checkbox></p>
+          <p><mat-checkbox formControlName="online">Entered online</mat-checkbox></p>
+          <p><mat-checkbox formControlName="phoneOrMail">Mail order / phone order</mat-checkbox></p>
+          @if (value.controls['paymentAcceptance'].hasError('atLeastSomeChecked') && (value.touched || value.dirty)) {
+            <mat-error>At least one payment method is <strong>required</strong></mat-error>
+          }
+        </form>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Needs processing by</mat-label>
+          <input matInput [min]="today" formControlName="needsProcessingBy" [matDatepicker]="picker" />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
   </form>
 </app-base-form>

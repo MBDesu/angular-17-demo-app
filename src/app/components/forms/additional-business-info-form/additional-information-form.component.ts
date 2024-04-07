@@ -3,11 +3,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { FormBuilder, NG_VALIDATORS, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, NG_VALIDATORS, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BaseFormComponent } from '../base-form/base-form.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NestedForm } from '../nested-form';
 import { CustomValidators } from '../validators';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-additional-business-information-form',
@@ -16,6 +17,7 @@ import { CustomValidators } from '../validators';
     BaseFormComponent,
     MatCardModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
@@ -39,6 +41,7 @@ import { CustomValidators } from '../validators';
 export class AdditionalInformationFormComponent extends NestedForm {
 
   private fb = inject(FormBuilder);
+  protected today = new Date();
 
   override value = this.fb.group({
     paymentAcceptance: this.fb.group({
@@ -48,6 +51,7 @@ export class AdditionalInformationFormComponent extends NestedForm {
     }, {
       validators: CustomValidators.requireAtLeastSomeCheckedValidator(),
     }),
+    needsProcessingBy: [this.today, Validators.required],
   });
 
   constructor() {

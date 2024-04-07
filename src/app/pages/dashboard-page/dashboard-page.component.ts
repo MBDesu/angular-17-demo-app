@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import mermaid from 'mermaid';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
+    MatExpansionModule,
     MatDividerModule,
   ],
   templateUrl: './dashboard-page.component.html',

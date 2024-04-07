@@ -1,120 +1,126 @@
-<h1>Mermaid</h1>
-<mat-divider />
-<br>
-<br>
-<h2>Class Diagram</h2>
-<mat-divider />
-<pre class="mermaid">
-  ---
-  title: Nested Forms
-  ---
-  classDiagram
+<h1>Mermaid.js Diagrams</h1>
+<mat-accordion multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Class Diagram</mat-panel-title>
+      <mat-panel-description>Nested Forms</mat-panel-description>
+    </mat-expansion-panel-header>
+    <pre class="mermaid">
+      ---
+      title: Nested Forms
+      ---
+      classDiagram
 
-  class ControlValueAccessor
-  &lt;&lt;interface&gt;&gt; ControlValueAccessor
-    ControlValueAccessor : +registerOnChange((T) =&gt; void) void
-    ControlValueAccessor : +registerOnTouched() void
-    ControlValueAccessor : +writeValue(FormGroup) void
+      class ControlValueAccessor
+      &lt;&lt;interface&gt;&gt; ControlValueAccessor
+        ControlValueAccessor : +registerOnChange((T) =&gt; void) void
+        ControlValueAccessor : +registerOnTouched() void
+        ControlValueAccessor : +writeValue(FormGroup) void
 
-  class Validator
-  &lt;&lt;interface&gt;&gt; Validator
-    Validator : +validate() ValidationErrors|null
+      class Validator
+      &lt;&lt;interface&gt;&gt; Validator
+        Validator : +validate() ValidationErrors|null
 
-  class NestedForm
-  ControlValueAccessor &lt;|-- NestedForm
-  Validator &lt;|-- NestedForm
-    NestedForm : +FormGroup value*
-  note for NestedForm "Implements\nControlValueAccessor\nto reduce boilerplate"
+      class NestedForm
+      ControlValueAccessor &lt;|-- NestedForm
+      Validator &lt;|-- NestedForm
+        NestedForm : +FormGroup value*
+      note for NestedForm "Implements\nControlValueAccessor\nto reduce boilerplate"
 
-  class BaseFormComponent
-    BaseFormComponent : +string title
-  note for BaseFormComponent "Places the form\non a titled\nmat-card"
+      class BaseFormComponent
+        BaseFormComponent : +string title
+      note for BaseFormComponent "Places the form\non a titled\nmat-card"
 
-  class FormsPageComponent
-    FormsPageComponent : #FormGroup form
+      class FormsPageComponent
+        FormsPageComponent : #FormGroup form
 
-  class BusinessInformationFormComponent
-  NestedForm &lt;|-- BusinessInformationFormComponent
-  BaseFormComponent *-- BusinessInformationFormComponent
-  BusinessInformationFormComponent *-- FormsPageComponent
-    BusinessInformationFormComponent : +FormGroup value
+      class BusinessInformationFormComponent
+      NestedForm &lt;|-- BusinessInformationFormComponent
+      BaseFormComponent *-- BusinessInformationFormComponent
+      BusinessInformationFormComponent *-- FormsPageComponent
+        BusinessInformationFormComponent : +FormGroup value
 
-  class AdditionalInformationFormComponent
-  NestedForm &lt;|-- AdditionalInformationFormComponent
-  BaseFormComponent *-- AdditionalInformationFormComponent
-  AdditionalInformationFormComponent *-- FormsPageComponent
-    AdditionalInformationFormComponent : +FormGroup value
-
-</pre>
-<br>
-<br>
-<h2>Git Diagram</h2>
-<mat-divider />
-<pre class="mermaid">
-  ---
-  title: Branching Strategy
-  ---
-  gitGraph
-    commit
-    branch feature order: 3
-    checkout Development
-    checkout feature
-    commit
-    commit
-    commit id:"1p"
-    checkout Development
-    merge feature id:"1"
-    branch Staging order: 1
-    checkout Staging
-    cherry-pick id:"1" parent:"1p"
-    commit tag:"release-24.6.0"
-    branch hotfix order: 0
-    checkout feature
-    commit
-    commit
-    commit id:"2p"
-    checkout Development
-    merge feature id:"2"
-    checkout Staging
-    cherry-pick id:"2" parent:"2p"
-    checkout hotfix
-    commit
-    commit
-    commit id:"h1" tag:"hotfix-24.6.1"
-    checkout feature
-    commit
-    commit
-    commit
-    checkout Development
-    merge feature
-    checkout Staging
-    merge hotfix
-    checkout Development
-    merge Staging
-</pre>
-<br>
-<br>
-<h2>Sequence Diagram</h2>
-<mat-divider />
-<pre class="mermaid">
-sequenceDiagram
-	Client->>+Resource Server: /api/v1/resource
-	break when no id_token is present
-		Resource Server-->>-Client: 401
-	end
-	Client->>+Google: Sign in with Google
-	Google-->>-Client: id_token
-	Client->>+Resource Server: /api/v1/resource with id_token
-	Resource Server->>+Google: Validate id_token
-	break when id_token is invalid
-		Google-->>Resource Server: 4xx
-		Resource Server-->>Client: 401
-	end
-	Google-->>-Resource Server: 200
-	Resource Server->>Resource Server: handle request
-	Resource Server-->>-Client: 200
-	box rgb(250,128,114) Web Application
-		participant Client
-		participant Resource Server
-	end
-</pre>
+      class AdditionalInformationFormComponent
+      NestedForm &lt;|-- AdditionalInformationFormComponent
+      BaseFormComponent *-- AdditionalInformationFormComponent
+      AdditionalInformationFormComponent *-- FormsPageComponent
+        AdditionalInformationFormComponent : +FormGroup value
+    </pre>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Git Diagram</mat-panel-title>
+      <mat-panel-description>Branching Strategy</mat-panel-description>
+    </mat-expansion-panel-header>
+    <pre class="mermaid">
+      ---
+      title: Branching Strategy
+      ---
+      gitGraph
+        commit
+        branch feature order: 3
+        checkout Development
+        checkout feature
+        commit
+        commit
+        commit id:"1p"
+        checkout Development
+        merge feature id:"1"
+        branch Staging order: 1
+        checkout Staging
+        cherry-pick id:"1" parent:"1p"
+        commit tag:"release-24.6.0"
+        branch hotfix order: 0
+        checkout feature
+        commit
+        commit
+        commit id:"2p"
+        checkout Development
+        merge feature id:"2"
+        checkout Staging
+        cherry-pick id:"2" parent:"2p"
+        checkout hotfix
+        commit
+        commit
+        commit id:"h1" tag:"hotfix-24.6.1"
+        checkout feature
+        commit
+        commit
+        commit
+        checkout Development
+        merge feature
+        checkout Staging
+        merge hotfix
+        checkout Development
+        merge Staging
+    </pre>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Sequence Diagram</mat-panel-title>
+      <mat-panel-description>Sign in with Google as Authorization Provider</mat-panel-description>
+    </mat-expansion-panel-header>
+    <pre class="mermaid">
+      sequenceDiagram
+        Client->>+Resource Server: /api/v1/resource
+        break when no id_token is present
+          Resource Server-->>-Client: 401
+        end
+        Client->>+Google: Sign in with Google
+        Google-->>-Client: id_token
+        Client->>+Resource Server: /api/v1/resource with id_token
+        Resource Server->>+Google: Validate id_token
+        break when id_token is invalid
+          Google-->>Resource Server: 4xx
+          Resource Server-->>Client: 401
+        end
+        Google-->>-Resource Server: 200
+        Resource Server->>Resource Server: handle request
+        Resource Server-->>-Client: 200
+        box rgb(250,128,114) Web Application
+          participant Client
+          participant Resource Server
+        end
+    </pre>
+  </mat-expansion-panel>
+</mat-accordion>
