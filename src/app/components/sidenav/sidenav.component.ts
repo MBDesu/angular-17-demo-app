@@ -47,6 +47,8 @@ export class SidenavComponent implements OnInit {
         this.updateNavItems();
       }
     });
+
+    this.updateNavItems();
   }
 
   protected navigateToGitHub(githubUrl: string | null): void {
