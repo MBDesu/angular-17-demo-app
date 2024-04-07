@@ -15,11 +15,13 @@ export class SessionManagementService {
 
   public initialize(): void {
     const authConfig: AuthConfig = {
-      issuer: 'https://accounts.google.com',
-      strictDiscoveryDocumentValidation: false,
       clientId: '963658036131-qisveqqlblqbsvnq8ojtevkfqca2a55q.apps.googleusercontent.com',
+      issuer: 'https://accounts.google.com',
       redirectUri: window.location.origin + '/dashboard',
       scope: 'openid profile email',
+      strictDiscoveryDocumentValidation: false,
+
+      showDebugInformation: true,
     };
     this.authService.configure(authConfig);
     this.authService.setupAutomaticSilentRefresh();
@@ -29,15 +31,25 @@ export class SessionManagementService {
       .subscribe(() => this.logout());
   }
 
-  public async login(): Promise<boolean> {
-    if (!this.isLoggedIn) {
-      this.isLoggedIn = await this.authService.loadDiscoveryDocumentAndTryLogin();
-      if (!this.isLoggedIn) {
-        this.authService.initImplicitFlow();
+  public async login(): Promise<void> {
+    await this.authService.loadDiscoveryDocumentAndTryLogin().then((didReceiveTokens) => {
+      if (didReceiveTokens) {
+        this.isLoggedIn = true;
+        return Promise.resolve();
+      } else {
+        if (this.authService.hasValidIdToken() && this.authService.hasValidAccessToken()) {
+          this.isLoggedIn = true;
+          return Promise.resolve();
+        } else {
+          return new Promise(resolve => {
+            this.authService.initLoginFlow();
+            window.addEventListener('unload', () => {
+              resolve(true);
+            });
+          });
+        }
       }
-      return Promise.resolve(this.isLoggedIn);
-    }
-    return false;
+    });
   }
 
   public logout(): void {

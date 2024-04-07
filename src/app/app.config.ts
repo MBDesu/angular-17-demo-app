@@ -4,8 +4,12 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
-import { provideOAuthClient } from 'angular-oauth2-oidc';
+import { OAuthStorage, provideOAuthClient } from 'angular-oauth2-oidc';
 import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
+
+export function storageFactory() : OAuthStorage {
+  return localStorage;
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideMomentDateAdapter(),
     provideOAuthClient(),
+    { provide: OAuthStorage, useFactory: storageFactory },
     provideRouter(routes),
   ]
 };

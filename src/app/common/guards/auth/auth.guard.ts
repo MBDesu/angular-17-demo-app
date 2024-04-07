@@ -5,7 +5,7 @@ import { SessionManagementService } from '../../services/session-management/sess
 export const authGuard: CanActivateFn = async (): Promise<boolean> => {
   const sessionManagementService: SessionManagementService = inject(SessionManagementService);
   if (!sessionManagementService.isLoggedIn) {
-    return await sessionManagementService.login();
+    await sessionManagementService.login();
   }
   return true;
 };
