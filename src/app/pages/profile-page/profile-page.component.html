@@ -1,0 +1,72 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>
+      <div class="mat-card-header-container">
+        <img [ngSrc]="userProfile['picture']"
+             class="profile-icon"
+             width="30"
+             height="30"
+             alt="user image"
+        />
+        <span class="spacer"></span>
+        <span>
+          {{userProfile['name']}}
+        </span>
+      </div>
+    </mat-card-title>
+    <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>First Name</mat-label>
+          <input matInput [value]="userProfile['given_name']" [disabled]="true" />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>First Name</mat-label>
+          <input matInput [value]="userProfile['family_name']" [disabled]="true" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [value]="userProfile['email']" [disabled]="true" />
+          @if (userProfile['email_verified']) {
+            <button matSuffix mat-icon-button [disabled]="true">
+              <mat-icon>checkmark</mat-icon>
+            </button>
+          } @else {
+            <button matSuffix mat-icon-button [disabled]="true">
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Token Not Before</mat-label>
+          <input matInput [value]="userProfile['nbf'] * 1000 | date:'MMM d, y, h:mm:ss a z'" [disabled]="true" />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Token Issued At</mat-label>
+          <input matInput [value]="userProfile['iat'] * 1000 | date:'MMM d, y, h:mm:ss a z'" [disabled]="true" />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Token Expires At</mat-label>
+          <input matInput [value]="userProfile['exp'] * 1000 | date:'MMM d, y, h:mm:ss a z'" [disabled]="true" />
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

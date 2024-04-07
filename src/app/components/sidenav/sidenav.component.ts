@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { githubRoutes, navigableRoutes } from '../../app.routes';
+import { githubRoutes, navigableRoutes, PageRoute } from '../../app.routes';
 import { NavigableRoute } from '../../common/models/navigable-routes';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -60,8 +60,8 @@ export class SidenavComponent implements OnInit {
     return githubRoutes[route];
   }
 
-  protected activate(navItem: NavigableRoute): void {
-    this.router.navigate([navItem.route]).then((): void => {
+  protected activate(route: string): void {
+    this.router.navigate([route]).then((): void => {
       return;
     });
   }
@@ -72,4 +72,5 @@ export class SidenavComponent implements OnInit {
     });
   }
 
+  protected readonly PageRoute = PageRoute;
 }
