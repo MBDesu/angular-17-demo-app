@@ -20,11 +20,9 @@ export class SessionManagementService {
       redirectUri: window.location.origin + '/dashboard',
       scope: 'openid profile email',
       strictDiscoveryDocumentValidation: false,
-
-      showDebugInformation: true,
     };
     this.authService.configure(authConfig);
-    this.authService.setupAutomaticSilentRefresh();
+    this.authService.setupAutomaticSilentRefresh({listenTo: 'id_token'});
 
     this.authService.events
       .pipe(filter(e => ['session_terminated', 'session_error'].includes(e.type)))
@@ -53,17 +51,19 @@ export class SessionManagementService {
   }
 
   public logout(): void {
-    this.authService.revokeTokenAndLogout().then((idk) => console.log(idk));
-    this.authService.logOut();
-    this.router.navigate([PageRoute.SPLASH]).then(() => this.isLoggedIn = false);
+    this.authService.revokeTokenAndLogout().then(() => {
+      this.router.navigate([PageRoute.SPLASH]).then(
+        () => this.isLoggedIn = false
+      );
+    });
   }
 
   public getProfile(): Record<string, string | number | boolean> {
     return this.authService.getIdentityClaims();
   }
 
-  public getToken(): string {
-    return this.authService.getAccessToken();
-  }
+  // public getToken(): string {
+  //   return this.authService.getAccessToken();
+  // }
 
 }
