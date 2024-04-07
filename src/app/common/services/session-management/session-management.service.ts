@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { PageRoute } from '../../../app.routes';
 import { Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class SessionManagementService {
     };
     this.authService.configure(authConfig);
     this.authService.setupAutomaticSilentRefresh();
+
+    this.authService.events
+      .pipe(filter(e => ['session_terminated', 'session_error'].includes(e.type)))
+      .subscribe(() => this.logout());
   }
 
   public async login(): Promise<boolean> {
