@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { navigableRoutes } from '../../app.routes';
+import { githubRoutes, navigableRoutes } from '../../app.routes';
 import { NavigableRoute } from '../../common/models/navigable-routes';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -47,6 +47,17 @@ export class SidenavComponent implements OnInit {
         this.updateNavItems();
       }
     });
+  }
+
+  protected navigateToGitHub(githubUrl: string | null): void {
+    if (githubUrl) {
+      window.open(githubUrl, '_blank');
+    }
+  }
+
+  protected resolveGithubUrlFromRoute(): string | null {
+    const route = this.router.url.replace('/', '');
+    return githubRoutes[route];
   }
 
   protected activate(navItem: NavigableRoute): void {

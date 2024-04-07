@@ -11,6 +11,11 @@ export enum PageRoute {
   FORMS = 'forms',
 }
 
+export const githubRoutes: { [key: string]: string } = {
+  'dashboard': 'https://github.com/MBDesu/angular-17-demo-app/tree/main/src/app/pages/dashboard-page',
+  'forms': 'https://github.com/MBDesu/angular-17-demo-app/tree/main/src/app/pages/forms-page',
+};
+
 export const navigableRoutes: NavigableRoute[] = [
   { label: 'Dashboard', route: PageRoute.DASHBOARD },
   { label: 'Forms', route: PageRoute.FORMS },

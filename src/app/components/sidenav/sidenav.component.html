@@ -4,6 +4,11 @@
   </button>
   <span>{{ title }}</span>
   <span class="spacer"></span>
+  @if (resolveGithubUrlFromRoute()) {
+    <button mat-icon-button (click)="navigateToGitHub(resolveGithubUrlFromRoute())">
+      <mat-icon>code</mat-icon>
+    </button>
+  }
   <button mat-stroked-button [matMenuTriggerFor]="userMenu">
     <div class="button-label-container">
       <span>{{ sessionManagementService.getProfile()['given_name'] }}</span>
