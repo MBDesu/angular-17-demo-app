@@ -28,7 +28,8 @@
               "dayjs",
               "dompurify",
               "elkjs/lib/elk.bundled.js",
-              "mermaid"
+              "mermaid",
+              "moment"
             ],
             "polyfills": [
               "zone.js"
