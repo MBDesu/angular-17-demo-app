@@ -4,6 +4,7 @@
   </button>
   <span>{{ title }}</span>
   <span class="spacer"></span>
+  <mat-slide-toggle #darkModeSwitch aria-label="toggle theme" (toggleChange)="toggleTheme()"></mat-slide-toggle>
   @if (resolveGithubUrlFromRoute()) {
     <button mat-icon-button (click)="navigateToGitHub(resolveGithubUrlFromRoute())">
       <mat-icon>code</mat-icon>
@@ -33,12 +34,12 @@
   </mat-menu>
 </mat-toolbar>
 <mat-sidenav-container class="app-content">
-  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+  <mat-sidenav style="width: 150px;" #sidenav mode="side" [(opened)]="opened">
     <mat-nav-list>
       @for (navItem of navItems; track navItem) {
-        <mat-list-item #item [activated]="navItem.active ?? false" (click)="activate(navItem.route)">
-          <div matListItemTitle>{{navItem.label}}</div>
-        </mat-list-item>
+        <a mat-list-item [routerLink]="navItem.route" [activated]="navItem.active ?? false">
+          {{navItem.label}}
+        </a>
       }
     </mat-nav-list>
   </mat-sidenav>

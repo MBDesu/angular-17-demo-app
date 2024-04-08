@@ -18,6 +18,6 @@ export const appConfig: ApplicationConfig = {
     provideMomentDateAdapter(),
     provideOAuthClient(),
     { provide: OAuthStorage, useFactory: storageFactory },
-    provideRouter(routes),
+    provideRouter(routes), provideAnimationsAsync(),
   ]
 };

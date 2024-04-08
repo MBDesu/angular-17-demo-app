@@ -1,0 +1,13 @@
+<form [formGroup]="value">
+  <mat-button-toggle-group appearance="standard" [hideMultipleSelectionIndicator]="true" name="fontStyle" formControlName="fontStyle" multiple>
+    <mat-button-toggle value="bold">
+      <mat-icon>format_bold</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="italic">
+      <mat-icon>format_italic</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="underline">
+      <mat-icon>format_underline</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</form>

@@ -24,17 +24,17 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     ReactiveFormsModule,
   ],
   providers: [
-  {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: AdditionalInformationFormComponent,
-    multi: true,
-  },
-  {
-    provide: NG_VALIDATORS,
-    useExisting: AdditionalInformationFormComponent,
-    multi: true,
-  },
-],
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: AdditionalInformationFormComponent,
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: AdditionalInformationFormComponent,
+      multi: true,
+    },
+  ],
   templateUrl: './additional-information-form.component.html',
   styleUrl: './additional-information-form.component.scss'
 })

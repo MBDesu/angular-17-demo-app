@@ -1,10 +1,6 @@
 import { Routes } from '@angular/router';
-import { SplashPageComponent } from './pages/splash-page/splash-page.component';
 import { NavigableRoute } from './common/models/navigable-routes';
-import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
-import { FormsPageComponent } from './pages/forms-page/forms-page.component';
 import { authGuard } from './common/guards/auth/auth.guard';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
 export enum PageRoute {
   SPLASH = 'splash',
@@ -25,10 +21,37 @@ export const navigableRoutes: NavigableRoute[] = [
 ];
 
 export const routes: Routes = [
-  { path: '', redirectTo: PageRoute.SPLASH, pathMatch: 'full',    title: 'Some App', data: { displayNav: false } },
-
-  { path: PageRoute.SPLASH,    component: SplashPageComponent,    title: 'Some App', data: { displayNav: false } },
-  { path: PageRoute.DASHBOARD, component: DashboardPageComponent, title: 'Some App - Dashboard',    canActivate: [authGuard] },
-  { path: PageRoute.FORMS,     component: FormsPageComponent,     title: 'Some App - Forms',        canActivate: [authGuard] },
-  { path: PageRoute.PROFILE,   component: ProfilePageComponent,   title: 'Some App - User Profile', canActivate: [authGuard] },
+  {
+    path: '',
+    redirectTo: PageRoute.SPLASH,
+    pathMatch: 'full',
+    title: 'Some App'
+  },
+  {
+    path: PageRoute.SPLASH,
+    loadComponent: () => import('./pages/splash-page/splash-page.component')
+      .then((x) => x.SplashPageComponent),
+    title: 'Some App'
+  },
+  {
+    path: PageRoute.DASHBOARD,
+    loadComponent: () => import('./pages/dashboard-page/dashboard-page.component')
+      .then((x) => x.DashboardPageComponent),
+    title: 'Some App - Dashboard',
+    canActivate: [authGuard]
+  },
+  {
+    path: PageRoute.FORMS,
+    loadComponent: () => import('./pages/forms-page/forms-page.component')
+      .then((x) => x.FormsPageComponent),
+    title: 'Some App - Forms',
+    canActivate: [authGuard]
+  },
+  {
+    path: PageRoute.PROFILE,
+    loadComponent: () => import('./pages/profile-page/profile-page.component')
+      .then((x) => x.ProfilePageComponent),
+    title: 'Some App - User Profile',
+    canActivate: [authGuard]
+  },
 ];

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import mermaid from 'mermaid';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { WysiwygEditorComponent } from '../../components/wysiwyg-editor/wysiwyg-editor.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,6 +10,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
   imports: [
     MatExpansionModule,
     MatDividerModule,
+    WysiwygEditorComponent,
   ],
   templateUrl: './dashboard-page.component.html',
   styleUrl: './dashboard-page.component.scss'
