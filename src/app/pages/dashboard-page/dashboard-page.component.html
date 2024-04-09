@@ -1,5 +1,5 @@
 <h1>Mermaid.js Diagrams</h1>
-<mat-accordion #accordion multi>
+<mat-accordion multi>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>Class Diagram</mat-panel-title>
@@ -8,6 +8,8 @@
     <pre class="mermaid">
       ---
       title: Nested Forms
+      config:
+        theme: dark
       ---
       classDiagram
       class ControlValueAccessor
@@ -54,6 +56,8 @@
     <pre class="mermaid">
       ---
       title: Branching Strategy
+      config:
+        theme: dark
       ---
       gitGraph
         commit
@@ -100,6 +104,10 @@
       <mat-panel-description>Sign in with Google as Authorization Provider</mat-panel-description>
     </mat-expansion-panel-header>
     <pre class="mermaid">
+      ---
+      config:
+        theme: dark
+      ---
       sequenceDiagram
         Client-&gt;&gt;+Resource Server: /api/v1/resource
         break when no id_token is present

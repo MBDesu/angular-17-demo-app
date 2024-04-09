@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { githubRoutes, navigableRoutes, PageRoute } from '../../app.routes';
@@ -11,6 +11,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { SessionManagementService } from '../../common/services/session-management/session-management.service';
 import { NgOptimizedImage } from '@angular/common';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { ThemingService } from '../../common/services/theming/theming.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -32,13 +33,14 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 })
 export class SidenavComponent implements OnInit, AfterViewInit {
 
+  themingService = inject(ThemingService);
+
   @ViewChild('darkModeSwitch', { read: ElementRef })
   protected darkModeSwitchElement: ElementRef | undefined;
 
   @Input({ required: true })
   public title!: string;
 
-  private isDark = true;
   protected navItems: NavigableRoute[] = [];
   protected opened = false;
   protected readonly PageRoute = PageRoute;
@@ -54,6 +56,10 @@ export class SidenavComponent implements OnInit, AfterViewInit {
       if (e instanceof NavigationEnd) {
         this.updateNavItems();
       }
+    });
+
+    this.themingService.themeSwitch.subscribe((isDarkTheme) => {
+      this.toggleTheme(isDarkTheme);
     });
 
     this.updateNavItems();
@@ -95,13 +101,11 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     });
   }
 
-  protected toggleTheme(): void {
-    if (this.isDark) {
-      document.body.classList.add('light-theme');
-      this.isDark = false;
-    } else {
+  protected toggleTheme(isDarkTheme: boolean): void {
+    if (isDarkTheme) {
       document.body.attributes.removeNamedItem('class');
-      this.isDark = true;
+    } else {
+      document.body.classList.add('light-theme');
     }
   }
 

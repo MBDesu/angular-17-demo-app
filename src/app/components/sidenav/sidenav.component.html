@@ -4,7 +4,7 @@
   </button>
   <span>{{ title }}</span>
   <span class="spacer"></span>
-  <mat-slide-toggle #darkModeSwitch aria-label="toggle theme" (toggleChange)="toggleTheme()"></mat-slide-toggle>
+  <mat-slide-toggle #darkModeSwitch aria-label="toggle theme" (toggleChange)="themingService.toggleTheme()"></mat-slide-toggle>
   @if (resolveGithubUrlFromRoute()) {
     <button mat-icon-button (click)="navigateToGitHub(resolveGithubUrlFromRoute())">
       <mat-icon>code</mat-icon>
