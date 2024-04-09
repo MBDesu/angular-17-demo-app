@@ -46,10 +46,7 @@ export class DashboardPageComponent implements OnInit {
         const themeRegex = /(theme: )([A-Za-z]+)/;
         const matches = mermaidCode.match(themeRegex);
         el.innerHTML = mermaidCode.replace(`${matches?.[1]}${matches?.[2]}`, `${matches?.[1]}${theme}`);
-      } else {
-        document.querySelectorAll('pre.mermaid')?.forEach((el) => el.setAttribute('mermaid-code', el.innerHTML));
       }
-
       el.setAttribute('mermaid-code', el.innerHTML);
     });
 
