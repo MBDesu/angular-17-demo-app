@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '@angular/material' as mat;
 @use '@angular/material-experimental' as matx;
 @use '@angular/material/core/theming/theming' as theming;
@@ -30,10 +31,28 @@ $light-theme: create-theme($type: light, $density: 0, $primary: matx.$m3-rose-pa
 // **Be sure that you only ever include this mixin once!**
 @include mat.core();
 
+@mixin get-theme-color($prop, $theme, $role) {
+  #{$prop}: mat.get-theme-color($theme, $role);
+}
+
+@mixin get-component-colors($theme) {
+  @include get-theme-color(--mdc-elevated-card-container-color, $theme, surface-container);
+  @include get-theme-color(--mat-expansion-container-background-color, $theme, surface-container);
+  @include get-theme-color(--mat-sidenav-container-background-color, $theme, surface-container);
+  @include get-theme-color(--mat-toolbar-container-background-color, $theme, surface-container);
+}
+
+@mixin get-theme-props() {
+  --mat-sidenav-container-shape: 0px;
+  --mat-list-active-indicator-shape: 0px;
+}
+
 // Include the default theme styles.
 html {
   @include mat.all-component-themes($dark-theme);
   @include matx.color-variants-back-compat($dark-theme);
+  @include get-component-colors($dark-theme);
+  @include get-theme-props();
 
   .strong-focus {
     @include mat.strong-focus-indicators-color($dark-theme);
@@ -41,10 +60,12 @@ html {
 
 }
 
+
 .light-theme {
   @include mat.all-component-colors($light-theme);
   @include matx.color-variants-back-compat($light-theme);
   @include mat.typography-hierarchy($light-theme, $back-compat: true);
+  @include get-component-colors($light-theme);
 
   &.strong-focus {
     @include mat.strong-focus-indicators-color($light-theme);
