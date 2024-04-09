@@ -26,6 +26,7 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class ProfilePageComponent implements OnInit {
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   userProfile!: any;
   sessionManagementService = inject(SessionManagementService);
 

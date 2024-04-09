@@ -16,7 +16,6 @@ import { ThemingService } from '../../common/services/theming/theming.service';
 })
 export class DashboardPageComponent implements OnInit {
 
-  private graphs!: NodeListOf<HTMLElement>;
   private themingService = inject(ThemingService);
   protected mermaidConfig: MermaidConfig = {
     securityLevel: 'loose',
@@ -40,14 +39,20 @@ export class DashboardPageComponent implements OnInit {
     const graphs = document.querySelectorAll('pre.mermaid');
 
     graphs.forEach((el) => {
-      if (el.getAttribute('data-processed')) {
+      if (el.getAttribute('data-processed')) { // we know it's not first time setup
         el.removeAttribute('data-processed');
-        const mermaidCode = el.getAttribute('mermaid-code') ?? '';
-        const themeRegex = /(theme: )([A-Za-z]+)/;
-        const matches = mermaidCode.match(themeRegex);
-        el.innerHTML = mermaidCode.replace(`${matches?.[1]}${matches?.[2]}`, `${matches?.[1]}${theme}`);
+      } else { // we know it's first time setup
+        el.setAttribute('mermaid-code', el.innerHTML);
       }
-      el.setAttribute('mermaid-code', el.innerHTML);
+
+      // must set theme in case it is not the default, even on first time setup
+      const mermaidCode = el.getAttribute('mermaid-code') ?? '';
+      const themeRegex = /(theme: )([A-Za-z]+)/;
+      const matches = mermaidCode.match(themeRegex);
+      if (theme !== matches?.[2]) {
+        el.innerHTML = mermaidCode.replace(`${matches?.[1]}${matches?.[2]}`, `${matches?.[1]}${theme}`);
+        el.setAttribute('mermaid-code', el.innerHTML);
+      }
     });
 
     mermaid.run();

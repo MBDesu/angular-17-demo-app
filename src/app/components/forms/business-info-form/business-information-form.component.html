@@ -21,13 +21,15 @@
       </div>
     </div>
     <div class="row">
-      <mat-form-field class="full-width">
-        <mat-label>Address Line One</mat-label>
-        <input matInput formControlName="addressLineOne" placeholder="123 Main St">
-        @if (value.controls.addressLineOne.hasError('required')) {
-          <mat-error>Address is <strong>required</strong></mat-error>
-        }
-      </mat-form-field>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Address Line One</mat-label>
+          <input matInput formControlName="addressLineOne" placeholder="123 Main St">
+          @if (value.controls.addressLineOne.hasError('required')) {
+            <mat-error>Address is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+      </div>
     </div>
     <div class="row">
       <div class="col">
