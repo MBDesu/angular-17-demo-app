@@ -31,6 +31,54 @@ $light-theme: create-theme($type: light, $density: 0, $primary: matx.$m3-rose-pa
 // **Be sure that you only ever include this mixin once!**
 @include mat.core();
 
+$roles: (
+  'primary',
+  'on-primary',
+  'primary-container',
+  'on-primary-container',
+  'primary-fixed',
+  'primary-fixed-dim',
+  'on-primary-fixed',
+  'on-primary-fixed-variant',
+  'secondary',
+  'on-secondary',
+  'secondary-container',
+  'on-secondary-container',
+  'secondary-fixed',
+  'secondary-fixed-dim',
+  'on-secondary-fixed',
+  'on-secondary-fixed-variant',
+  'tertiary',
+  'on-tertiary',
+  'tertiary-container',
+  'on-tertiary-container',
+  'tertiary-fixed',
+  'tertiary-fixed-dim',
+  'on-tertiary-fixed',
+  'on-tertiary-fixed-variant',
+  'error',
+  'on-error',
+  'error-container',
+  'on-error-container',
+  'surface-dim',
+  'surface',
+  'surface-bright',
+  'surface-container-lowest',
+  'surface-container-low',
+  'surface-container',
+  'surface-container-high',
+  'surface-container-highest',
+  'on-surface',
+  'on-surface-variant',
+  'outline',
+  'outline-variant',
+  'inverse-surface',
+  'inverse-on-surface',
+  'inverse-primary',
+  'scrim',
+  'shadow',
+);
+
 @mixin get-theme-color($prop, $theme, $role) {
   #{$prop}: mat.get-theme-color($theme, $role);
 }
@@ -40,6 +88,7 @@ $light-theme: create-theme($type: light, $density: 0, $primary: matx.$m3-rose-pa
   @include get-theme-color(--mat-expansion-container-background-color, $theme, surface-container);
   @include get-theme-color(--mat-sidenav-container-background-color, $theme, surface-container);
   @include get-theme-color(--mat-toolbar-container-background-color, $theme, surface-container);
+  @include get-theme-color(--mat-menu-container-color, $theme, surface-container-highest);
 }
 
 @mixin get-theme-props() {
@@ -47,25 +96,36 @@ $light-theme: create-theme($type: light, $density: 0, $primary: matx.$m3-rose-pa
   --mat-list-active-indicator-shape: 0px;
 }
 
+@mixin get-role-prop($theme, $prefix, $role) {
+  #{'--' + $prefix + '-' + $role}: mat.get-theme-color($theme, $role);
+}
+
 // Include the default theme styles.
 html {
   @include mat.all-component-themes($dark-theme);
   @include matx.color-variants-back-compat($dark-theme);
   @include get-component-colors($dark-theme);
+  @include mat.typography-hierarchy($dark-theme, $back-compat: true);
   @include get-theme-props();
 
-  .strong-focus {
-    @include mat.strong-focus-indicators-color($dark-theme);
+  @each $role in $roles {
+    @include get-role-prop($dark-theme, 'dark', $role);
   }
 
+  &.strong-focus {
+    @include mat.strong-focus-indicators-color($dark-theme);
+  }
 }
-
 
 .light-theme {
   @include mat.all-component-colors($light-theme);
   @include matx.color-variants-back-compat($light-theme);
   @include mat.typography-hierarchy($light-theme, $back-compat: true);
   @include get-component-colors($light-theme);
+
+  @each $role in $roles {
+    @include get-role-prop($light-theme, 'light', $role);
+  }
 
   &.strong-focus {
     @include mat.strong-focus-indicators-color($light-theme);

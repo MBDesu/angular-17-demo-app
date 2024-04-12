@@ -1,0 +1,16 @@
+.flex-container {
+  display: flex;
+  flex: 1 1 auto;
+  flex-flow: row wrap;
+  gap: 10px 10px;
+  justify-content: flex-start;
+}
+
+.item {
+  min-width: 220px;
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 0.4em;
+  justify-content: flex-end;
+}

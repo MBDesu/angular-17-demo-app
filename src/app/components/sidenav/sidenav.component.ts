@@ -58,10 +58,6 @@ export class SidenavComponent implements OnInit, AfterViewInit {
       }
     });
 
-    this.themingService.themeSwitch.subscribe((isDarkTheme) => {
-      this.toggleTheme(isDarkTheme);
-    });
-
     this.updateNavItems();
   }
 
@@ -99,14 +95,6 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     this.navItems.map((navItem: NavigableRoute): void => {
       navItem.active = this.router.url === '/' + navItem.route;
     });
-  }
-
-  protected toggleTheme(isDarkTheme: boolean): void {
-    if (isDarkTheme) {
-      document.body.attributes.removeNamedItem('class');
-    } else {
-      document.body.classList.add('light-theme');
-    }
   }
 
 }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FontStyleComponent } from './font-style.component';
+import { ThemePageComponent } from './theme-page.component';
 
-describe('FontStyleComponent', () => {
-  let component: FontStyleComponent;
-  let fixture: ComponentFixture<FontStyleComponent>;
+describe('ThemePageComponent', () => {
+  let component: ThemePageComponent;
+  let fixture: ComponentFixture<ThemePageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FontStyleComponent]
+      imports: [ThemePageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(FontStyleComponent);
+    fixture = TestBed.createComponent(ThemePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
