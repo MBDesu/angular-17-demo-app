@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { timer } from 'rxjs';
-import { SessionManagementService } from '../../common/services/session-management/session-management.service';
 
 @Component({
   selector: 'app-timeout-modal',
@@ -21,7 +20,6 @@ export class TimeoutModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<TimeoutModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { countdownStart: number },
-    private sessionManagementService: SessionManagementService,
   ) {}
 
   ngOnInit(): void {
