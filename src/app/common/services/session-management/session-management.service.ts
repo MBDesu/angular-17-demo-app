@@ -1,17 +1,26 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { PageRoute } from '../../../app.routes';
 import { Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
+import { TimeoutService } from '../timeout-service/timeout.service';
+import { TimeoutModalComponent } from '../../../components/timeout-modal/timeout-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionManagementService {
 
-  isLoggedIn = false;
+  private authService = inject(OAuthService);
+  private dialog = inject(MatDialog);
+  private idleTimeoutInSeconds = 45;
+  private idleExpiryInSeconds = 15;
+  private router = inject(Router);
+  private timeoutService = inject(TimeoutService);
+  private timeoutSubscription: Subscription = new Subscription();
 
-  constructor(private authService: OAuthService, private router: Router) {}
+  public isLoggedIn = false;
 
   public initialize(): void {
     const authConfig: AuthConfig = {
@@ -33,14 +42,17 @@ export class SessionManagementService {
     await this.authService.loadDiscoveryDocumentAndTryLogin().then((didReceiveTokens) => {
       if (didReceiveTokens) {
         this.isLoggedIn = true;
+        this.startIdleTimer();
         return Promise.resolve();
       } else {
         if (this.authService.hasValidIdToken() && this.authService.hasValidAccessToken()) {
           this.isLoggedIn = true;
+          this.startIdleTimer();
           return Promise.resolve();
         } else {
           return new Promise(resolve => {
             this.authService.initLoginFlow();
+            this.timeoutSubscription.unsubscribe();
             window.addEventListener('unload', () => {
               resolve(true);
             });
@@ -51,10 +63,12 @@ export class SessionManagementService {
   }
 
   public logout(): void {
-    this.authService.revokeTokenAndLogout().then(() => {
-      this.router.navigate([PageRoute.SPLASH]).then(
-        () => this.isLoggedIn = false
-      );
+    this.timeoutSubscription.unsubscribe();
+    this.router.navigate([PageRoute.SPLASH]).then(() => {
+      this.isLoggedIn = false;
+      this.authService.revokeTokenAndLogout().then(() => {
+        return;
+      });
     });
   }
 
@@ -62,8 +76,24 @@ export class SessionManagementService {
     return this.authService.getIdentityClaims();
   }
 
-  // public getToken(): string {
-  //   return this.authService.getAccessToken();
-  // }
+  private startIdleTimer(): void {
+    this.timeoutSubscription = this.timeoutService.startWatching(this.idleTimeoutInSeconds)
+      .subscribe((isTimedOut: boolean): void => {
+        if (isTimedOut) {
+          this.timeoutService.stopIdleTimer();
+          const dialogRef = this.dialog.open(TimeoutModalComponent, {
+            data: { countdownStart: this.idleExpiryInSeconds },
+          });
+          dialogRef.afterClosed().subscribe((result: boolean): void => {
+            if (result) {
+              this.timeoutService.resetIdleTimer();
+            } else {
+              this.timeoutSubscription.unsubscribe();
+              this.logout();
+            }
+          });
+        }
+      });
+  }
 
 }

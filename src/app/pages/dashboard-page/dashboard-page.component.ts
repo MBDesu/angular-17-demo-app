@@ -30,9 +30,10 @@ export class DashboardPageComponent implements OnInit {
   ngOnInit(): void {
     mermaid.initialize(this.mermaidConfig);
     this.initMermaid(this.themingService.isDarkTheme ? 'dark' : 'default');
-    this.themingService.themeSwitch.subscribe((isDarkTheme) => {
-      this.initMermaid(isDarkTheme ? 'dark' : 'default');
-    });
+    this.themingService.themeSwitch
+      .subscribe((isDarkTheme) => {
+        this.initMermaid(isDarkTheme ? 'dark' : 'default');
+      });
   }
 
   private initMermaid(theme: string): void {

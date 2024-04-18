@@ -52,11 +52,12 @@ export class SidenavComponent implements OnInit, AfterViewInit {
       this.navItems = navigableRoutes;
     }
 
-    this.router.events.subscribe((e): void => {
-      if (e instanceof NavigationEnd) {
-        this.updateNavItems();
-      }
-    });
+    this.router.events
+      .subscribe((e): void => {
+        if (e instanceof NavigationEnd) {
+          this.updateNavItems();
+        }
+      });
 
     this.updateNavItems();
   }

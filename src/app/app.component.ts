@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -27,10 +27,9 @@ import { SessionManagementService } from './common/services/session-management/s
 })
 export class AppComponent implements OnInit {
 
-  title = 'ng-spring-front';
-  test: boolean = true;
+  protected sessionManagementService = inject(SessionManagementService);
 
-  constructor(public sessionManagementService: SessionManagementService) {}
+  public title = 'Angular Demo App';
 
   ngOnInit(): void {
     this.sessionManagementService.initialize();
